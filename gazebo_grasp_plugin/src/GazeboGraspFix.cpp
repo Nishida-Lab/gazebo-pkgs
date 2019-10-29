@@ -446,12 +446,12 @@ bool CheckGrip(const std::vector<GzVector3> &forces,
               std::endl;
     return false;
   }
-  if (minAngleDiff < M_PI_2)
-  {
-    std::cerr << "ERROR: CheckGrip: min angle must be at least 90 degrees (PI/2)" <<
-              std::endl;
-    return false;
-  }
+  // if (minAngleDiff < M_PI_2)
+  // {
+  //   std::cerr << "ERROR: CheckGrip: min angle must be at least 90 degrees (PI/2)" <<
+  //             std::endl;
+  //   return false;
+  // }
   std::vector<GzVector3>::const_iterator it1, it2;
   for (it1 = forces.begin(); it1 != forces.end(); ++it1)
   {
@@ -551,8 +551,8 @@ void GazeboGraspFix::OnUpdate()
     const ObjectContactInfo &objContInfo = ocIt->second;
 
     // gzmsg<<"Number applied forces on "<<objName<<": "<<objContInfo.appliedForces.size()<<std::endl;
-  
-    // TODO: remove this test print, for issue #26 ------------------- 
+
+    // TODO: remove this test print, for issue #26 -------------------
 #if 0
     physics::CollisionPtr objColl =
       boost::dynamic_pointer_cast<physics::Collision>(GetEntityByName(world, objName));
@@ -564,7 +564,7 @@ void GazeboGraspFix::OnUpdate()
         << ", absolute val " << GetLength(linVel) << std::endl;
     }
 #endif
-    // ------------------- 
+    // -------------------
 
     float minAngleDiff = this->forcesAngleTolerance; //120 * M_PI/180;
     if (!CheckGrip(objContInfo.appliedForces, minAngleDiff, 0.3))
